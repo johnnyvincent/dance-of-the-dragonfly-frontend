@@ -57,7 +57,7 @@ export const gameControl = (entities, { time, touches, dispatch }) => {
         // check for collisions with adversaries
         const dpx = dragonfly.position[0]
         const dpy = dragonfly.position[1]
-        const apx = dragonfly.position[0]
+        const apx = body.position[0]
         if (
           dpx + Constants.dragonfly_width / 2 >= apx &&
                 dpx - Constants.dragonfly_width / 2 <= apx + Constants.adversary_width
