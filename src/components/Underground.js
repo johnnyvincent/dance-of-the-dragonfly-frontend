@@ -1,31 +1,26 @@
-import React, { Component } from 'react'
+import React, { memo } from 'react'
 import { Image } from 'react-native'
 import Constants from '../Constant.js'
 import undergroundImage from '../../assets/underground.png'
 
-export default class Floor extends Component {
-  constructor (props) {
-    super(props)
+const Floor = memo(({ position }) => {
+  const width = Constants.max_width
+  const height = Constants.underground_height
+  const [ x, y ] = position;
 
-    this.width = Constants.max_width
-    this.height = Constants.underground_height
-  }
+  return (
+    <Image
+      style={{
+        position: 'absolute',
+        width,
+        height,
+        top: y,
+        left: x
+      }}
+      resizeMode="stretch"
+      source={undergroundImage}
+    />
+  );
+});
 
-  render () {
-    const x = this.props.position[0]
-    const y = this.props.position[1]
-    return (
-      <Image
-        style={{
-          position: 'absolute',
-          width: this.width,
-          height: this.height,
-          top: y,
-          left: x
-        }}
-        resizeMode="stretch"
-        source={undergroundImage}
-      />
-    )
-  }
-}
+export default Floor;
