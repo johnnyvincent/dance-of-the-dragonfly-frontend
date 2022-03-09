@@ -53,7 +53,7 @@ export const deleteScore = (id, user) => {
 
 export const updateScore = (id, score, user) => {
   return axios.patch(
-    `${apiUrl}/posts/${id}`,
+    `${apiUrl}/scores/${id}`,
     { score: { score } },
     {
       headers: {
