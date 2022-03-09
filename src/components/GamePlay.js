@@ -46,6 +46,7 @@ const GamePlay = () => {
     }
   }
 
+  // create first set of adversaries
   useEffect(() => {
     if ((adversariesOne + (adversariesWidth / 2) < screenWidth / 2) && !firstPoint) {
       setScore(score => score + 1)
@@ -53,17 +54,17 @@ const GamePlay = () => {
     }
 
     if (adversariesOne > -adversariesWidth) {
-        adversariesOneTimerId = setInterval(() => {
-            setAdversariesTwo(adversariesTwo => adversariesTwo - 5)
-        }, 30)
-    return () => {
+      adversariesOneTimerId = setInterval(() => {
+        setAdversariesOne(adversariesOne => adversariesOne - 5)
+      }, 30)
+      return () => {
         clearInterval(adversariesTwoTimerId)
+      }
     } else {
-        setAdversariesTwo(screenWidth)
-        setAdversariesOneHeight( - Math.random() * 100 )
-        setFirstPoint(null)
+      setAdversariesTwo(screenWidth)
+      setAdversariesOneHeight(-Math.random() * 100)
+      setFirstPoint(null)
     }
-    }, [adversariesOne]
-  })
-
+  }, [adversariesOne]
+  )
 }
