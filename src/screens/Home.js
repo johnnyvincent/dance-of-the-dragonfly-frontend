@@ -1,41 +1,18 @@
-import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, Animated, TouchableOpacity, Dimensions } from 'react-native'
-import Constants from '../Constant.js'
-import backgroundImage from '../../assets/pond-background.png'
+import React from 'react'
+import Link from 'react-router-dom'
 
-const { height } = Dimensions.get('window')
+const Home = () => (
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props)
-  }
+  <div className="txtwrapper">
+    <div className="static-txt"></div>
+    <ul className="dynamic-txts">
+      <li><span>Welcome to Dance of the Dragonfly! Click DANCE below!</span></li>
+      <Link to="/play">DANCE</Link>
+      <Link to="/scores">See Your Scores</Link>
+    </ul>
 
-  onPlayApp () {
-    this.props.navigation.navigate('Play')
-  }
+  </div>
 
-  onLeaderBoardSelect () {
-    this.props.navigate('LeaderBoard')
-  }
+)
 
-  render () {
-    return (
-
-      <View>
-
-        <Image
-          source={ backgroundImage }
-          resizeMode='stretch'
-        />
-        <Animated.View
-          style={[ styles.buttonContainer, {opacity: this.buttonOpacity }]}>
-          <TouchableOpacity
-            style={ styles.button }
-            onPress={() => this.onPlayApp()}>
-            <Text style={[ styles.buttonText, Styles.fontSmall]}>Play</Text>
-          </TouchableOpacity>
-        </Animated.View>
-      </View>
-    )
-  }
-}
+export default Home

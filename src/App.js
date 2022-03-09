@@ -3,7 +3,6 @@ import React, { Component, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
 
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
@@ -53,7 +52,36 @@ const App = () => {
             path='/change-password'
             element={<ChangePassword msgAlert={msgAlert} user={user} /> }
           />
-
+          <Switch>
+            <Route
+              user={user}
+              path='/posts/create'
+              render={() => (
+                <PostCreate msgAlert={this.msgAlert} user={user} />
+              )}
+            />
+            <Route
+              user={user}
+              path='/scores/owner'
+              render={() => (
+                <OneUsersAllScores msgAlert={this.msgAlert} user={user} />
+              )}
+            />
+            <Route
+              user={user}
+              path='/scores/:id'
+              render={() => (
+                <Score msgAlert={this.msgAlert} user={user} />
+              )}
+            />
+            <Route
+              user={user}
+              path='/scores'
+              render={() => (
+                <Scores msgAlert={this.msgAlert} user={user} />
+              )}
+            />
+          </Switch>
         </Routes>
       </main>
     </>
