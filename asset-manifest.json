@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/dance-of-the-dragonfly-frontend/static/css/main.d5cf0687.chunk.css",
+    "main.js": "/dance-of-the-dragonfly-frontend/static/js/main.79d75ec0.chunk.js",
+    "main.js.map": "/dance-of-the-dragonfly-frontend/static/js/main.79d75ec0.chunk.js.map",
+    "runtime-main.js": "/dance-of-the-dragonfly-frontend/static/js/runtime-main.558faab2.js",
+    "runtime-main.js.map": "/dance-of-the-dragonfly-frontend/static/js/runtime-main.558faab2.js.map",
+    "static/js/2.4c069f47.chunk.js": "/dance-of-the-dragonfly-frontend/static/js/2.4c069f47.chunk.js",
+    "static/js/2.4c069f47.chunk.js.map": "/dance-of-the-dragonfly-frontend/static/js/2.4c069f47.chunk.js.map",
+    "index.html": "/dance-of-the-dragonfly-frontend/index.html",
+    "static/css/main.d5cf0687.chunk.css.map": "/dance-of-the-dragonfly-frontend/static/css/main.d5cf0687.chunk.css.map",
+    "static/js/2.4c069f47.chunk.js.LICENSE.txt": "/dance-of-the-dragonfly-frontend/static/js/2.4c069f47.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.558faab2.js",
+    "static/js/2.4c069f47.chunk.js",
+    "static/css/main.d5cf0687.chunk.css",
+    "static/js/main.79d75ec0.chunk.js"
+  ]
+}
