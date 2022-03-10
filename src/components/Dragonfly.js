@@ -1,31 +1,25 @@
-import React, { Component } from 'react'
-import { Image } from 'react-native'
+import React from 'react'
+import { View } from 'react-native'
 import dragonflyImage from '../../assets/dragonfly.png'
-import Constants from '../Constant.js'
+// import Constants from '../Constant.js'
 
-export default class Bird extends Component {
-  constructor (props) {
-    super(props)
-    this.width = Constants.dragonfly_width
-    this.height = Constants.dragonfly_height
-  }
+const Dragonfly = ({ dragonflyBottom, dragonflyLeft }) => {
+  const dragonflyWidth = 50
+  const dragonflyHeight = 60
 
-  render () {
-    const x = this.props.position[0] - this.width / 2
-    const y = this.props.position[1] - this.height / 2
-
-    return (
-      <Image
-        style={{
-          position: 'absolute',
-          top: y,
-          left: x,
-          width: this.width,
-          height: this.height
-        }}
-        resizeMode='contain'
-        source={dragonflyImage}
-      />
-    )
-  }
+  return (
+    <View
+      style={{
+        position: 'absolute',
+        left: dragonflyLeft - (dragonflyWidth / 2),
+        bottom: dragonflyBottom,
+        width: dragonflyWidth,
+        height: dragonflyHeight
+      }}
+      resizeMode='contain'
+      source={dragonflyImage}
+    />
+  )
 }
+
+export default Dragonfly

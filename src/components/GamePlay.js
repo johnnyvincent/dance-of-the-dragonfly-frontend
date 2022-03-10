@@ -4,10 +4,11 @@ import Adversaries from './components/Adversaries'
 import Dragonfly from './components/Dragonfly'
 import pondBackground from './assets/pond-background.png'
 
-const GamePlay = () => {
+export default function GamePlay () {
   const screenWidth = Dimensions.get('screen').width
   const screenHeight = Dimensions.get('screen').height
 
+  // create value for state of Dragonfly to enable gravity
   const [dragonflyBottom, setDragonflyBottom] = useState(screenHeight / 2)
   const [adversariesOne, setAdversariesOne] = useState(screenWidth)
   const [adversariesTwo, setAdversariesTwo] = useState(screenWidth + screenWidth / 2 + 30)
@@ -19,14 +20,15 @@ const GamePlay = () => {
   const [secondPoint, setSecondPoint] = useState(null)
 
   const dragonflyLeft = screenWidth / 2
-  const adversariesWidth = 60
-  const adversariesHeight = 300
+  const adversaryWidth = 60
+  const adversaryHeight = 300
   const gravity = 5
-  const gap = 250
-
+  const gap = 200
+  // set game timer as a global variable
   let gameTimerId
   let adversariesOneTimerId
   let adversariesTwoTimerId
+
   // create falling effect for dragonfly where dragonfly drops 3 pixels every 30 milliseconds
   useEffect(() => {
     if (dragonflyBottom > 0) {
@@ -48,12 +50,12 @@ const GamePlay = () => {
 
   // create first set of adversaries
   useEffect(() => {
-    if ((adversariesOne + (adversariesWidth / 2) < screenWidth / 2) && !firstPoint) {
+    if ((adversariesOne + (adversaryWidth / 2) < screenWidth / 2) && !firstPoint) {
       setScore(score => score + 1)
       setFirstPoint(true)
     }
 
-    if (adversariesOne > -adversariesWidth) {
+    if (adversariesOne > -adversaryWidth) {
       adversariesOneTimerId = setInterval(() => {
         setAdversariesOne(adversariesOne => adversariesOne - 5)
       }, 30)
@@ -62,6 +64,7 @@ const GamePlay = () => {
       }
     } else {
       setAdversariesOne(screenWidth)
+      // randomize adversary heights
       setAdversariesOneHeight(-Math.random() * 100)
       setFirstPoint(null)
     }
@@ -70,12 +73,12 @@ const GamePlay = () => {
 
   // create second set of adversaries
   useEffect(() => {
-    if ((adversariesTwo + (adversariesWidth / 2) < screenWidth / 2) && !secondPoint) {
+    if ((adversariesTwo + (adversaryWidth / 2) < screenWidth / 2) && !secondPoint) {
       setScore(score => score + 1)
       setSecondPoint(true)
     }
 
-    if (adversariesTwo > -adversariesWidth) {
+    if (adversariesTwo > -adversaryWidth) {
       adversariesTwoTimerId = setInterval(() => {
         setAdversariesTwo(adversariesTwo => adversariesTwo - 5)
       }, 30)
@@ -87,14 +90,16 @@ const GamePlay = () => {
       setAdversariesTwoHeight(-Math.random() * 100)
       setSecondPoint(null)
     }
-  }, [adversariesOne])
+  }, [adversariesTwo])
+
+  // check for collisions
 
   useEffect(() => {
     if (
       (
         (
-          dragonflyBottom < (adversariesOneHeight + adversariesHeight + 30) ||
-          dragonflyBottom > (adversariesOneHeight + adversariesHeight + gap - 30)
+          dragonflyBottom < (adversariesOneHeight + adversaryHeight + 30) ||
+          dragonflyBottom > (adversariesOneHeight + adversaryHeight + gap - 30)
         ) &&
     (
       adversariesOne > screenWidth / 2 - 30 &&
@@ -103,8 +108,8 @@ const GamePlay = () => {
       ) ||
       (
         (
-          dragonflyBottom < (adversariesTwoHeight + adversariesHeight + 30) ||
-          dragonflyBottom > (adversariesTwoHeight + adversariesHeight + gap - 30)
+          dragonflyBottom < (adversariesTwoHeight + adversaryHeight + 30) ||
+          dragonflyBottom > (adversariesTwoHeight + adversaryHeight + gap - 30)
 
         ) &&
       (
@@ -124,6 +129,7 @@ const GamePlay = () => {
     clearInterval(adversariesTwoTimerId)
     setIsGameOver(true)
   }
+
   return (
     <TouchableWithoutFeedback onPress={() => jump()}>
       <ImageBackground style={styles.container} source={pondBackground} resizeMode={'contain'}>
@@ -134,8 +140,16 @@ const GamePlay = () => {
         />
         <Adversaries
           adversariesOne={adversariesOne}
-          adversariesWidth={adversariesWidth}
-          adversariesHeight={adversariesHeight}
+          adversaryWidth={adversaryWidth}
+          adversaryHeight={adversaryHeight}
+          randomBottom={setAdversariesOneHeight}
+          gap={gap}
+        />
+        <Adversaries
+          adversariesOne={adversariesTwo}
+          adversaryWidth={adversaryWidth}
+          adversaryHeight={adversaryHeight}
+          randomBottom={setAdversariesTwoHeight}
           gap={gap}
         />
       </ImageBackground>
@@ -151,5 +165,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
-
-export default GamePlay
