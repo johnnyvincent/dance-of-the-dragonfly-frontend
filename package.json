@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@inlet/react-pixi": "^6.6.5",
     "@react-native-masked-view/masked-view": "^0.2.6",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/stack": "^6.1.1",

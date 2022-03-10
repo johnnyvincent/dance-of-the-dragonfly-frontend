@@ -1,167 +1,178 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, Dimensions, TouchableWithoutFeedback, ImageBackground } from 'react-native'
+import { useTick } from '@inlet/react-pixi'
 import Adversaries from './Adversaries'
 import Dragonfly from './Dragonfly'
+import Underground from './Underground'
 import pondBackground from '../assets/pond-background.png'
+import * as Constants from './constants'
+import { GameStatus, circleRect, randomAdversary } from './utils'
 
-export default function GamePlay () {
-  const screenWidth = Dimensions.get('screen').width
-  const screenHeight = Dimensions.get('screen').height
 
-  // create value for state of Dragonfly to enable gravity
-  const [dragonflyBottom, setDragonflyBottom] = useState(screenHeight / 2)
-  const [adversariesOne, setAdversariesOne] = useState(screenWidth)
-  const [adversariesTwo, setAdversariesTwo] = useState(screenWidth + screenWidth / 2 + 30)
-  const [adversariesOneHeight, setAdversariesOneHeight] = useState(0)
-  const [adversariesTwoHeight, setAdversariesTwoHeight] = useState(0)
-  const [isGameOver, setIsGameOver] = useState(false)
+const GamePlay = () => {
+  const [gameStatus, setGameStatus] = useState(GameStatus.Waiting)
   const [score, setScore] = useState(0)
-  const [firstPoint, setFirstPoint] = useState(null)
-  const [secondPoint, setSecondPoint] = useState(null)
+  const [dragonflyY, setDragonflyY] = useState(Constants.Canvas_Height / 2)
+  const [velocity, setVelocity] = useState(0)
+  const [adversaries, setAdversaries] = useState([randomAdversary(Constants.Canvas_Width)])
 
-  const dragonflyLeft = screenWidth / 2
-  const adversaryWidth = 60
-  const adversaryHeight = 300
-  const gravity = 5
-  const gap = 200
-  // set game timer as a global variable
-  let gameTimerId
-  let adversariesOneTimerId
-  let adversariesTwoTimerId
-
-  // create falling effect for dragonfly where dragonfly drops 3 pixels every 30 milliseconds
-  useEffect(() => {
-    if (dragonflyBottom > 0) {
-      gameTimerId = setInterval(() => {
-        setDragonflyBottom(dragonflyBottom => dragonflyBottom - gravity)
-      }, 30)
-
-      return () => {
-        clearInterval(gameTimerId)
-      }
-    }
-  }, [dragonflyBottom])
-  // create jump effect where dragonfly jumps fifty pixels upwards when screen is pressed
-  const jump = () => {
-    if (!isGameOver && (dragonflyBottom < screenHeight)) {
-      setDragonflyBottom(dragonflyBottom => dragonflyBottom + 50)
-    }
+  const resetGame = () => {
+    setGameStatus(GameStatus.Waiting)
+    setScore(0)
+    setDragonflyY(Constants.Canvas_Height / 2)
+    setVelocity(0)
+    setAdversaries([randomAdversary(Constants.Canvas_Width)])
   }
+}
 
-  // create first set of adversaries
-  useEffect(() => {
-    if ((adversariesOne + (adversaryWidth / 2) < screenWidth / 2) && !firstPoint) {
-      setScore(score => score + 1)
-      setFirstPoint(true)
-    }
+const applyDragonflyPhysics = (deltaTime) => {
+  if (velocity === 0) return
 
-    if (adversariesOne > -adversaryWidth) {
-      adversariesOneTimerId = setInterval(() => {
-        setAdversariesOne(adversariesOne => adversariesOne - 5)
-      }, 30)
-      return () => {
-        clearInterval(adversariesOneTimerId)
+  setDragonflyY((prevDragonflyY) => prevDragonflyY + (velocity * deltaTime) / 2)
+  setVelocity((prevVelocity) => prevVelocity + Constants.Gravity * deltaTime)
+  setDragonflyY((prevDragonflyY) => prevDragonflyY + (velocity + deltaTime) / 2)
+
+  const groundLevel = Constants.Canvas_Height - Constants.Ground_Height - Constants.Dragonfly_Radius
+
+  if (dragonflyY > groundLevel) {
+    setVelocity(0)
+    setDragonflyY(groundLevel)
+  }
+}
+
+const moveAdversariesLeft = (deltaTime) => {
+  setAdversaries((prevAdversaries) =>
+    prevAdversaries.map((adversary) => {
+      const x = adversary.x - Constants.Adversary_Speed * deltaTime
+      return { ...adversary, x }
+    }))
+}
+
+const spawnNewAdversaries = () => {
+  setAdversaries((prevAdversaries) => {
+    let newAdversaries = [...prevAdversaries]
+    for (let adversary of newAdversaries) {
+      if (!adversary.scored && adversary.x < Constants.Dragonfly_X) {
+        setScore((prevScore) => prevScore + 1)
+        newAdversaries.push(randomAdversary())
+        adversary.scored = true
       }
-    } else {
-      setAdversariesOne(screenWidth)
-      // randomize adversary heights
-      setAdversariesOneHeight(-Math.random() * 100)
-      setFirstPoint(null)
     }
-  }, [adversariesOne]
-  )
+    return newAdversaries
+  })
+}
 
-  // create second set of adversaries
-  useEffect(() => {
-    if ((adversariesTwo + (adversaryWidth / 2) < screenWidth / 2) && !secondPoint) {
-      setScore(score => score + 1)
-      setSecondPoint(true)
-    }
+const deleteOffscreenAdversaries = () => {
+  if (adversaries[0].x <= -Constants.Adversary_Width) {
+    setAdversaries((prevAdversaries) => prevAdversaries.slice(1))
+  }
+}
 
-    if (adversariesTwo > -adversaryWidth) {
-      adversariesTwoTimerId = setInterval(() => {
-        setAdversariesTwo(adversariesTwo => adversariesTwo - 5)
-      }, 30)
-      return () => {
-        clearInterval(adversariesTwoTimerId)
-      }
-    } else {
-      setAdversariesTwo(screenWidth)
-      setAdversariesTwoHeight(-Math.random() * 100)
-      setSecondPoint(null)
-    }
-  }, [adversariesTwo])
+const groundCollision = () => {
+  const bottomDragonfly = DragonflyY + Constants.Dragonfly_Radius
+  const topGround = Constants.Canvas_Height - Constants.Ground_Height
+  return bottomDragonfly > topGround
+}
 
-  // check for collisions
-
-  useEffect(() => {
+const adversaryCollision = () => {
+  for (let adversary of adversaries) {
     if (
-      (
-        (
-          dragonflyBottom < (adversariesOneHeight + adversaryHeight + 30) ||
-          dragonflyBottom > (adversariesOneHeight + adversaryHeight + gap - 30)
-        ) &&
-    (
-      adversariesOne > screenWidth / 2 - 30 &&
-      adversariesOne < screenWidth / 2 + 30
-    )
-      ) ||
-      (
-        (
-          dragonflyBottom < (adversariesTwoHeight + adversaryHeight + 30) ||
-          dragonflyBottom > (adversariesTwoHeight + adversaryHeight + gap - 30)
-
-        ) &&
-      (
-        adversariesTwo > screenWidth / 2 - 30 &&
-        adversariesTwo < screenWidth / 2 + 30
-      )
+      circleRect(
+        Constants.Dragonfly_X,
+        dragonflyY,
+        Constants.Dragonfly_Radius,
+        adversary.x,
+        0,
+        Constants.Adversary_Width,
+        adversary.gapY - Constants.Adversary_Gap_Height / 2
       )
     ) {
-      console.log('game over')
-      gameOver()
+      return true
     }
-  })
-
-  const gameOver = () => {
-    clearInterval(gameTimerId)
-    clearInterval(adversariesOneTimerId)
-    clearInterval(adversariesTwoTimerId)
-    setIsGameOver(true)
+    if (
+      circleRect(
+        Constants.Dragonfly_X,
+        dragonflyY,
+        Constants.Dragonfly_Radius,
+        adversary.x,
+        adversary.gapY + Constants.Adversary_Gap_Height / 2,
+        Constants.Adversary_Width,
+        Constants.Canvas_Height - adversary.gapY - Constants.Adversary_Gap_Height / 2
+      )
+    ) {
+      return true
+    }
   }
+  return false
+}
 
+const jump = () => {
+  if (gameStatus === GameStatus.GameOver) { // had status === GameStatus.GameOver, error status is deprecated
+    resetGame()
+    return
+  }
+  if (gameStatus === GameStatus.Waiting) {
+    setStatus(GameStatus.Playing)
+  }
+  setVelocity(-Constants.Jump_Velocity)
+}
+
+const handleKeyPress = (e) => {
+  if (e.code !== 'Space') {
+    return
+  }
+  if (e.repeat) {
+    return
+  }
+  jump()
+}
+
+useEffect(() => {
+  document.addEventListener('keypress', handleKeyPress)
+  document.addEventListener('click', jump)
+  return () => {
+    document.addEventListener('keypress', handleKeyPress)
+    document.removeEventListener('click', jump)
+  }
+}, [gameStatus]) // initially had callback of status - status is deprecated
+
+useTick((delta, ticker) => {
+  const deltaTime = ticker.deltaMS / 1000
+  applyDragonflyPhysics(deltaTime)
+  if (gameStatus !== GameStatus.Playing) {
+    return
+  }
+  moveAdversariesLeft(deltaTime)
+  spawnNewAdversaries()
+  deleteOffscreenAdversaries()
+
+  if (groundCollision() || adversaryCollision()) {
+    setStatus(GameStatus.GameOver)
+  }
+})
+
+if (gameStatus === GameStatus.GameOver) {
   return (
-    <TouchableWithoutFeedback onPress={() => jump()}>
-      <ImageBackground style={styles.container} source={pondBackground} resizeMode={'contain'}>
-        <Text>Score:{score}</Text>
-        <Dragonfly
-          dragonflyBottom={dragonflyBottom}
-          dragonflyLeft={dragonflyLeft}
-        />
-        <Adversaries
-          adversariesOne={adversariesOne}
-          adversaryWidth={adversaryWidth}
-          adversaryHeight={adversaryHeight}
-          randomBottom={setAdversariesOneHeight}
-          gap={gap}
-        />
-        <Adversaries
-          adversariesOne={adversariesTwo}
-          adversaryWidth={adversaryWidth}
-          adversaryHeight={adversaryHeight}
-          randomBottom={setAdversariesTwoHeight}
-          gap={gap}
-        />
-      </ImageBackground>
-    </TouchableWithoutFeedback>
+    <>
+      {adversaries.map((adversary, index) => {
+        return <Adversary key={index} {...adversary} />
+      })}
+      <Ground />
+      <Dragonfly height={dragonflyY} />
+      <Score score={score} />
+      <GameOver />
+    </>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+return (
+  <>
+    {adversaries.map((adversary, index) => {
+      return <Adversary key={index} {...adversary} />
+    })}
+    <Ground />
+    <Dragonfly height={dragonflyY} />
+    <Score score={ score } />
+  </>
+)
+
+export default GamePlay

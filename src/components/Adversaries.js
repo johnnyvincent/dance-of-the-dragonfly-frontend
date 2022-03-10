@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+// import { View } from 'react-native'
 import birdImage from '../assets/bird.png'
 import frogImage from '../assets/frog.png'
 // import Constants from '../Constant'
@@ -13,7 +13,7 @@ const Adversaries = ({
 }) => {
   return (
     <>
-      <View
+      <div>
         style={{
           position: 'absolute',
           left: adversariesOne,
@@ -21,10 +21,9 @@ const Adversaries = ({
           height: adversaryHeight,
           bottom: randomBottom + adversaryHeight + gap
         }}
-        resizeMode='stretch'
         source={birdImage}
-      />
-      <View
+      </div>
+      <div>
         style={{
           position: 'absolute',
           left: adversariesOne,
@@ -32,9 +31,8 @@ const Adversaries = ({
           height: adversaryHeight,
           bottom: randomBottom
         }}
-        resizeMode='stretch'
         source={frogImage}
-      />
+      </div>
     </>
   )
 }
