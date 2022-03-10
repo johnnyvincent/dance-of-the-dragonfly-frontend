@@ -1,8 +1,8 @@
 /* eslint-disable no-tabs */
-import React, { Component, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Route, Routes, Switch } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
-import { NavigationContainer } from '@react-navigation/native'
+// import { NavigationContainer } from '@react-navigation/native'
 
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
@@ -10,6 +10,11 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+
+import Scores from './components/scores/Scores'
+import OneUserAllScores from './components/scores/OneUserAllScores'
+import ScoreCreate from './components/scores/ScoreCreate'
+import Score from './components/scores/Score'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -55,16 +60,16 @@ const App = () => {
           <Switch>
             <Route
               user={user}
-              path='/posts/create'
+              path='/scores/create'
               render={() => (
-                <PostCreate msgAlert={this.msgAlert} user={user} />
+                <ScoreCreate msgAlert={this.msgAlert} user={user} />
               )}
             />
             <Route
               user={user}
               path='/scores/owner'
               render={() => (
-                <OneUsersAllScores msgAlert={this.msgAlert} user={user} />
+                <OneUserAllScores msgAlert={this.msgAlert} user={user} />
               )}
             />
             <Route
