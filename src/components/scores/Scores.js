@@ -3,7 +3,7 @@ import { indexScores } from '../../api/score'
 import { Link, Redirect } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import { format } from 'timeago.js'
-import './Posts.css'
+import './Scores.css'
 const Scores = ({ user, msgAlert }) => {
   const [scores, setScores] = useState([])
 
