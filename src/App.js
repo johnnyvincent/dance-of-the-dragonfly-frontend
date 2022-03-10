@@ -11,6 +11,7 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 
+import Home from './components/scores/Home'
 import Scores from './components/scores/Scores'
 import OneUserAllScores from './components/scores/OneUserAllScores'
 import ScoreCreate from './components/scores/ScoreCreate'
@@ -41,6 +42,12 @@ const App = () => {
       ))}
       <main className='container'>
         <Routes>
+          <Route
+            exact path='/'
+            render={() => (
+              <Home msgAlert={this.msgAlert} setUser={this.setUser} />
+            )}
+          />
           <Route
             path='/sign-up'
             element={<SignUp msgAlert={msgAlert} setUser={setUser} /> }
