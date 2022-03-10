@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, Dimensions, TouchableWithoutFeedback, Image, ImageBackground } from 'react-native'
+import { StyleSheet, Text, Dimensions, TouchableWithoutFeedback, ImageBackground } from 'react-native'
 import Adversaries from './components/Adversaries'
 import Dragonfly from './components/Dragonfly'
 import pondBackground from './assets/pond-background.png'
@@ -20,7 +20,7 @@ const GamePlay = () => {
 
   const dragonflyLeft = screenWidth / 2
   const adversariesWidth = 60
-  const obstaclesHeight = 300
+  const adversariesHeight = 300
   const gravity = 5
   const gap = 250
 
@@ -58,13 +58,98 @@ const GamePlay = () => {
         setAdversariesOne(adversariesOne => adversariesOne - 5)
       }, 30)
       return () => {
-        clearInterval(adversariesTwoTimerId)
+        clearInterval(adversariesOneTimerId)
       }
     } else {
-      setAdversariesTwo(screenWidth)
+      setAdversariesOne(screenWidth)
       setAdversariesOneHeight(-Math.random() * 100)
       setFirstPoint(null)
     }
   }, [adversariesOne]
   )
+
+  // create second set of adversaries
+  useEffect(() => {
+    if ((adversariesTwo + (adversariesWidth / 2) < screenWidth / 2) && !secondPoint) {
+      setScore(score => score + 1)
+      setSecondPoint(true)
+    }
+
+    if (adversariesTwo > -adversariesWidth) {
+      adversariesTwoTimerId = setInterval(() => {
+        setAdversariesTwo(adversariesTwo => adversariesTwo - 5)
+      }, 30)
+      return () => {
+        clearInterval(adversariesTwoTimerId)
+      }
+    } else {
+      setAdversariesTwo(screenWidth)
+      setAdversariesTwoHeight(-Math.random() * 100)
+      setSecondPoint(null)
+    }
+  }, [adversariesOne])
+
+  useEffect(() => {
+    if (
+      (
+        (
+          dragonflyBottom < (adversariesOneHeight + adversariesHeight + 30) ||
+          dragonflyBottom > (adversariesOneHeight + adversariesHeight + gap - 30)
+        ) &&
+    (
+      adversariesOne > screenWidth / 2 - 30 &&
+      adversariesOne < screenWidth / 2 + 30
+    )
+      ) ||
+      (
+        (
+          dragonflyBottom < (adversariesTwoHeight + adversariesHeight + 30) ||
+          dragonflyBottom > (adversariesTwoHeight + adversariesHeight + gap - 30)
+
+        ) &&
+      (
+        adversariesTwo > screenWidth / 2 - 30 &&
+        adversariesTwo < screenWidth / 2 + 30
+      )
+      )
+    ) {
+      console.log('game over')
+      gameOver()
+    }
+  })
+
+  const gameOver = () => {
+    clearInterval(gameTimerId)
+    clearInterval(adversariesOneTimerId)
+    clearInterval(adversariesTwoTimerId)
+    setIsGameOver(true)
+  }
+  return (
+    <TouchableWithoutFeedback onPress={() => jump()}>
+      <ImageBackground style={styles.container} source={pondBackground} resizeMode={'contain'}>
+        <Text>Score:{score}</Text>
+        <Dragonfly
+          dragonflyBottom={dragonflyBottom}
+          dragonflyLeft={dragonflyLeft}
+        />
+        <Adversaries
+          adversariesOne={adversariesOne}
+          adversariesWidth={adversariesWidth}
+          adversariesHeight={adversariesHeight}
+          gap={gap}
+        />
+      </ImageBackground>
+    </TouchableWithoutFeedback>
+  )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+})
+
+export default GamePlay
