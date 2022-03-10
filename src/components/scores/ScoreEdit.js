@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect, useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 
 import ScoreForm from './ScoreForm'
 import { showScore, updateScore } from '../../api/score'
@@ -12,7 +12,7 @@ const ScoreEdit = ({ user, msgAlert }) => {
   // if user is null, redirect to home page
   // Note: Must check before useEffect, since it needs user
   if (!user) {
-    return <Redirect to='/' />
+    return <Navigate to='/' />
   }
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const ScoreEdit = ({ user, msgAlert }) => {
 
   if (updated) {
     // Navigate to the 'show' page
-    return <Redirect to={`/scores/${id}`} />
+    return <Navigate to={`/scores/${id}`} />
   }
 
   return (

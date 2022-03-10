@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { createScore } from '../../api/score'
 import ScoreForm from './ScoreForm'
 
@@ -30,15 +30,15 @@ const ScoreCreate = ({ user, msgAlert }) => {
 
   // if user is null, redirect to home page
   if (!user) {
-    return <Redirect to='/' />
+    return <Navigate to='/' />
   } else if (createdId) {
     // if movie has been created,Navigate to the 'show' page
-    return <Redirect to={`/scores/${createdId}`} />
+    return <Navigate to={`/scores/${createdId}`} />
   }
   return (
     <div className='row'>
       <div className='col-md-3 mx-auto mt-5'>
-        <h3>Create Post</h3>
+        <h3>Create Score</h3>
         <ScoreForm
           handleSubmit={handleSubmit}
           score={score}

@@ -1,6 +1,6 @@
 /* eslint-disable no-tabs */
 import React, { useState } from 'react'
-import { Route, Routes, Switch } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 // import { NavigationContainer } from '@react-navigation/native'
 
@@ -57,36 +57,34 @@ const App = () => {
             path='/change-password'
             element={<ChangePassword msgAlert={msgAlert} user={user} /> }
           />
-          <Switch>
-            <Route
-              user={user}
-              path='/scores/create'
-              render={() => (
-                <ScoreCreate msgAlert={this.msgAlert} user={user} />
-              )}
-            />
-            <Route
-              user={user}
-              path='/scores/owner'
-              render={() => (
-                <OneUserAllScores msgAlert={this.msgAlert} user={user} />
-              )}
-            />
-            <Route
-              user={user}
-              path='/scores/:id'
-              render={() => (
-                <Score msgAlert={this.msgAlert} user={user} />
-              )}
-            />
-            <Route
-              user={user}
-              path='/scores'
-              render={() => (
-                <Scores msgAlert={this.msgAlert} user={user} />
-              )}
-            />
-          </Switch>
+          <Route
+            user={user}
+            path='/scores/create'
+            render={() => (
+              <ScoreCreate msgAlert={this.msgAlert} user={user} />
+            )}
+          />
+          <Route
+            user={user}
+            path='/scores/owner'
+            render={() => (
+              <OneUserAllScores msgAlert={this.msgAlert} user={user} />
+            )}
+          />
+          <Route
+            user={user}
+            path='/scores/:id'
+            render={() => (
+              <Score msgAlert={this.msgAlert} user={user} />
+            )}
+          />
+          <Route
+            user={user}
+            path='/scores'
+            render={() => (
+              <Scores msgAlert={this.msgAlert} user={user} />
+            )}
+          />
         </Routes>
       </main>
     </>

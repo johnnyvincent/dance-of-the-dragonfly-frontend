@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { indexScores } from '../../api/score'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import { format } from 'timeago.js'
 import './Scores.css'
@@ -8,7 +8,7 @@ const Scores = ({ user, msgAlert }) => {
   const [scores, setScores] = useState([])
 
   if (!user) {
-    return <Redirect to='/' />
+    return <Navigate to='/' />
   }
 
   useEffect(() => {
