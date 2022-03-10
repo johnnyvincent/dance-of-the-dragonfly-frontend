@@ -30,6 +30,7 @@
     "react-router-dom": "^6.1.1",
     "react-scripts": "4.0.3",
     "resolve": "^1.18.1",
+    "timeago.js": "^4.0.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
