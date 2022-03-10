@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import dragonflyImage from '../../assets/dragonfly.png'
+import dragonflyImage from '../assets/dragonfly.png'
 // import Constants from '../Constant.js'
 
 const Dragonfly = ({ dragonflyBottom, dragonflyLeft }) => {

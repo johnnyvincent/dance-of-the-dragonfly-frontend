@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, Dimensions, TouchableWithoutFeedback, ImageBackground } from 'react-native'
-import Adversaries from './components/Adversaries'
-import Dragonfly from './components/Dragonfly'
-import pondBackground from './assets/pond-background.png'
+import Adversaries from './Adversaries'
+import Dragonfly from './Dragonfly'
+import pondBackground from '../assets/pond-background.png'
 
 export default function GamePlay () {
   const screenWidth = Dimensions.get('screen').width

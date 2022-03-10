@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
-import birdImage from '../../assets/bird.png'
-import frogImage from '../../assets/frog.png'
+import birdImage from '../assets/bird.png'
+import frogImage from '../assets/frog.png'
 // import Constants from '../Constant'
 
 const Adversaries = ({
