@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import { format } from 'timeago.js'
 // import './Posts.css'
-const OneUsersAllScores = ({ user, msgAlert }) => {
+const OneUserAllScores = ({ user, msgAlert }) => {
   const [usersScores, setUsersScores] = useState([])
 
   if (!user) {
@@ -15,12 +15,12 @@ const OneUsersAllScores = ({ user, msgAlert }) => {
     const getAllScores = async () => {
       try {
         const res = await indexUsersScores(user)
-        setUsersScores(res.data.posts)
+        setUsersScores(res.data.scores)
       } catch (error) {
         // Alert the user, that they failed to sign up
         msgAlert({
-          heading: 'Posts Cant be displayed: ' + error.message,
-          message: 'Cant index Post',
+          heading: 'Scores Cant be displayed: ' + error.message,
+          message: 'Cant index Scores',
           // this will be red
           variant: 'danger'
         })
@@ -55,4 +55,4 @@ const OneUsersAllScores = ({ user, msgAlert }) => {
   )
 }
 
-export default OneUsersAllScores
+export default OneUserAllScores

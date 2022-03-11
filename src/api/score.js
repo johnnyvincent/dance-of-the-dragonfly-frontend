@@ -4,6 +4,7 @@ import apiUrl from '../apiConfig'
 export const createScore = (score, user) => {
   return axios.post(
     `${apiUrl}/scores/`,
+    { score: { score } },
     {
       headers: {
         Authorization: `Bearer ${user.token}`

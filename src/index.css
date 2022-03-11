@@ -94,7 +94,7 @@ body {
     position: absolute;
 }
 
-.ground {
+.underground {
     background-image: url('underground.png');
     width: 580px;
     height: 150px;

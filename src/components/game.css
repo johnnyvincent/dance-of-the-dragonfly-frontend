@@ -1,0 +1,62 @@
+#dragonfly {
+    width: 70px;
+    position: absolute;
+    left: 50px;
+    top: 320px;
+    height: auto;
+  }
+  
+  #underground {
+    width: 600px;
+    height: 150px;
+    position: absolute;
+    top: 650px;
+  }
+  
+  .adversaryUpper {
+    width: 52px;
+    position: absolute;
+    top: 0px;
+    height: 320px;
+    left: 180px;
+  }
+  
+  .adversaryLower {
+    width: 52px;
+    height: 520px;
+    position: absolute;
+    left: 180px;
+    top: 0px;
+  }
+  
+  .btnHoldingSpan {
+    position: absolute;
+    top: 800px;
+  }
+  
+  .Label1 {
+    position: absolute;
+    left: 145px;
+    top: 258px;
+    font-family: "Notable", sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+  }
+  
+  .Label2 {
+    position: absolute;
+    left: 187px;
+    top: 305px;
+    font-family: "Notable", sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+  }
+  
+  .score {
+    position: absolute;
+    font-family: "Notable", sans-serif;
+    color: #ffffff;
+    left: 2px;
+    top: -18px;
+    font-size: 49px;
+  }

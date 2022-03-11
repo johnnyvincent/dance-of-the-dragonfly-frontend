@@ -15,7 +15,10 @@ import Home from './components/scores/Home'
 import Scores from './components/scores/Scores'
 import OneUserAllScores from './components/scores/OneUserAllScores'
 import ScoreCreate from './components/scores/ScoreCreate'
+import ScoreEdit from './components/scores/ScoreEdit'
 import Score from './components/scores/Score'
+import AllUsers from './components/auth/IndexUsers'
+// import GamePlay from './components/scores/GamePlay'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -44,9 +47,7 @@ const App = () => {
         <Routes>
           <Route
             exact path='/'
-            render={() => (
-              <Home msgAlert={this.msgAlert} setUser={this.setUser} />
-            )}
+            element={<Home msgAlert={msgAlert} setUser={setUser} />}
           />
           <Route
             path='/sign-up'
@@ -66,32 +67,39 @@ const App = () => {
           />
           <Route
             user={user}
+            path='/users'
+            element={<AllUsers msgAlert={msgAlert} user={user} />}
+          />
+          <Route
+            user={user}
             path='/scores/create'
-            render={() => (
-              <ScoreCreate msgAlert={this.msgAlert} user={user} />
-            )}
+            element={<ScoreCreate msgAlert={msgAlert} user={user} />}
           />
           <Route
             user={user}
             path='/scores/owner'
-            render={() => (
-              <OneUserAllScores msgAlert={this.msgAlert} user={user} />
-            )}
+            element={<OneUserAllScores msgAlert={msgAlert} user={user} />}
           />
           <Route
             user={user}
             path='/scores/:id'
-            render={() => (
-              <Score msgAlert={this.msgAlert} user={user} />
-            )}
+            element={<Score msgAlert={msgAlert} user={user} />}
           />
           <Route
             user={user}
             path='/scores'
-            render={() => (
-              <Scores msgAlert={this.msgAlert} user={user} />
-            )}
+            element={<Scores msgAlert={msgAlert} user={user} />}
           />
+          <Route
+            user={user}
+            path='/scores/:id/edit'
+            element={<ScoreEdit msgAlert={msgAlert} user={user} />}
+          />
+          {/* <Route
+            user={user}
+            path='/scores/'
+            element={<ScoreEdit msgAlert={msgAlert} user={user} />}
+          /> */}
         </Routes>
       </main>
     </>
