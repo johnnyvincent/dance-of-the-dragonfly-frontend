@@ -38,7 +38,7 @@
     position: absolute;
     left: 145px;
     top: 258px;
-    font-family: "Notable", sans-serif;
+    font-family: 'Notable', sans-serif;
     color: #ffffff;
     font-size: 20px;
   }
@@ -47,16 +47,25 @@
     position: absolute;
     left: 187px;
     top: 305px;
-    font-family: "Notable", sans-serif;
+    font-family: 'Notable', sans-serif;
     color: #ffffff;
     font-size: 20px;
   }
   
   .score {
     position: absolute;
-    font-family: "Notable", sans-serif;
+    font-family: 'Notable', sans-serif;
     color: #ffffff;
     left: 2px;
     top: -18px;
     font-size: 49px;
+  }
+
+  #mainGame {
+    width: 600px;
+    height: 800px;
+    background-color: blueviolet;
+    background-image: url('../assets/pond-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
   }

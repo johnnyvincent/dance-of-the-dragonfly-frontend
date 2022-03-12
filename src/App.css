@@ -2,7 +2,7 @@
     width: 600px;
     height: 800px;
     background-color: blueviolet;
-    background-image: url('../../assets/pond-background.png');
+    background-image: url('./assets/pond-background.png');
     background-repeat: no-repeat;
     background-size: cover;
   }

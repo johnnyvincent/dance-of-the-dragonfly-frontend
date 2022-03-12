@@ -1,13 +1,32 @@
 import React from 'react'
-import GamePlay from './GamePlay'
+// import { Navigate } from 'react-router-dom'
+// import GamePlay from './GamePlay'
 
-const Home = () => (
+// const authenticatedOptions = (
+//   <>
+//     <GamePlay />
+//   </>
+// )
 
-  <div>
-    <GamePlay />
+// const unauthenticatedOptions = (
+//   <>
+//     <div>
+//     Sign in to play!
+//     </div>
+//   </>
+// )
 
-  </div>
-
-)
+const Home = ({ user }) => {
+  // if user is null, redirect to home page
+  // Note: Must check before useEffect, since it needs user
+  return (
+    <div className='mainGame'>
+      {/* <div>
+        {user ? authenticatedOptions : unauthenticatedOptions}
+        <GamePlay />
+      </div> */}
+    </div>
+  )
+}
 
 export default Home

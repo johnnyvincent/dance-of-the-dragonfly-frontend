@@ -12,7 +12,7 @@ class AdversaryLower extends Component {
           className='adversaryLower'
           style={{
             left: this.props.pos,
-            height: 650 - (this.props.upperAdversaryLength + 116),
+            height: 667 - (this.props.upperAdversaryLength + 116),
             top: 2 * this.props.upperAdversaryLength + 116 - this.props.upperAdversaryLength
           }}
         />

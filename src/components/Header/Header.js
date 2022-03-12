@@ -32,7 +32,7 @@ const Header = ({ user }) => (
   <Navbar bg='primary' variant='dark' expand='md'>
     <Container>
       <Navbar.Brand>
-        <Link to='/' style={{ color: '#FFF', textDecoration: 'none' }}>dance-of-the-dragonfly-frontend</Link>
+        <Link to='/' style={{ color: '#FFF', textDecoration: 'none' }}>Dance of the Dragonfly!</Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
