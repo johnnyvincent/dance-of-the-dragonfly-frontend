@@ -8,7 +8,7 @@ const authenticatedOptions = (
   <>
     <NavLink to='/scores/owner' className='nav-link OneUserAllScores'>See Your Scores </NavLink>
     <NavLink to='/users' className='nav-link makePost'>List of Users </NavLink>
-    <NavLink to='/scores/create' className='nav-link makePost'>Create a Score the easy way</NavLink>
+    <NavLink to='/scores/create' className='nav-link makePost'>Input Score</NavLink>
     <NavLink to='/scores' className='nav-link seePosts '>Scores</NavLink>
     <NavLink to='/change-password' className='nav-link'>Change Password</NavLink>
     <NavLink to='/sign-out' className='nav-link'>Sign Out</NavLink>

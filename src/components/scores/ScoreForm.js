@@ -14,7 +14,7 @@ const ScoreForm = ({ handleSubmit, score, setScore }) => (
       />
     </Form.Group>
     <Button className='mt-2 Bttn' variant='primary' type='submit'>Submit </Button>
-    <div className='mt-5 footer' >Change your score the easy way.</div>
+    <div className='mt-5 footer' >Input your score and dont cheat!</div>
   </Form>
 )
 export default ScoreForm

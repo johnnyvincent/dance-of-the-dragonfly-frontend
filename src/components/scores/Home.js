@@ -16,7 +16,7 @@ import React from 'react'
 //   </>
 // )
 
-const Home = ({ user }) => {
+const Home = () => {
   // if user is null, redirect to home page
   // Note: Must check before useEffect, since it needs user
   return (
