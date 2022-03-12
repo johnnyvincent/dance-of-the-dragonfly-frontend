@@ -37,7 +37,7 @@ export const indexUsersScores = (user) => {
 }
 
 export const showScore = (id, user) => {
-  return axios.get(`${apiUrl}/scores/${id}/`, {
+  return axios.get(`${apiUrl}/scores/${id}`, {
     headers: {
       Authorization: `Bearer ${user.token}`
     }

@@ -4,7 +4,6 @@ import { Spinner, Button } from 'react-bootstrap'
 import { deleteScore, showScore } from '../../api/score'
 import { format } from 'timeago.js'
 import './Score.css'
-import { SendCheck, TrashFill } from 'react-bootstrap-icons'
 
 const Score = ({ user, msgAlert }) => {
   const [score, setScore] = useState(null)
@@ -51,7 +50,7 @@ const Score = ({ user, msgAlert }) => {
   }
 
   // 3 states:
-  // If movie is `null`, we are loading
+  // If score is `null`, we are loading
   if (!score) {
     return (
       <Spinner animation='border' role='status'>
@@ -61,7 +60,7 @@ const Score = ({ user, msgAlert }) => {
   } else if (deleted) {
     return <Navigate to='/scores' />
   } else {
-    // We have a post, display it!
+    // We have a score, display it!
     return (
       <div className='post'>
         <div className='PostWrapper'>
@@ -71,9 +70,9 @@ const Score = ({ user, msgAlert }) => {
           <p>Easy dub? : {score.score}</p>
           <p>{score.owner}</p>
           <Link to={`/scores/${id}/edit`}>
-            <Button className='Bttn' variant='primary' type='submit'>Update Score <SendCheck /></Button>
+            <Button className='Bttn' variant='primary' type='submit'>Update Score </Button>
           </Link>
-          <Button className='Bttn' variant='danger' onClick={handleDeleteClick}>Delete Score<TrashFill /></Button>
+          <Button className='Bttn' variant='danger' onClick={handleDeleteClick}>Delete Score</Button>
         </div>
       </div>
     )

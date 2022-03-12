@@ -48,7 +48,7 @@ const OneUserAllScores = ({ user, msgAlert }) => {
   return (
     <div className='row'>
       <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-        <h3>Posts</h3>
+        <h3>Your Scores</h3>
         <ul>{scoreList}</ul>
       </div>
     </div>

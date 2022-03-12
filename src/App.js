@@ -71,7 +71,7 @@ class App extends Component {
           })
           // Pressing Enter more than once reloads the game
         } else {
-          window.location.reload()
+          return this.restartGame()
         }
       }
 
@@ -215,31 +215,29 @@ class App extends Component {
     }
 
     // Restart Function just reloads the webpage
-    restart = (e) => {
-      // Enter to start the game
-      if (e.key === 'Enter') {
-        if (this.state.enterAllowed) {
-          const gameTimer = setInterval(this.useEffect, 16.66)
-          const dragonflyTimer = setInterval(this.dragonflyMoveDown, 16.66)
-          const LabelVisible = false
-          const enterAllowed = false
-          this.setState({
-            gameTimer: gameTimer,
-            dragonflyTimer: dragonflyTimer,
-            LabelVisible: LabelVisible,
-            enterAllowed: enterAllowed
-          })
-          // Pressing Enter more than once reloads the game
-        } else {
-          window.location.reload()
-        }
-      }
-
-      // Function which ultimately calls dragonflyMoveUp()
-      if (e.key === ' ') {
-        const dragonflyFalling = false
-        this.setState({ dragonflyFalling: dragonflyFalling })
-      }
+    restartGame = () => {
+      console.log('havent figured out restart')
+      // this.setState = {
+      //   gameTimer: null,
+      //   speed: 1,
+      //   adversarypos1: 250,
+      //   randomLength1: Math.floor(Math.random() * (450 - 50 + 1) + 50),
+      //   adversarypos2: 548,
+      //   randomLength2: Math.floor(Math.random() * (450 - 50 + 1) + 50),
+      //   dragonflyPos: 320,
+      //   dragonflyFall: 3,
+      //   dragonflyJump: 80,
+      //   dragonflyTimer: null,
+      //   dragonflyFalling: true,
+      //   cnt: 0,
+      //   dragonflyRotate: 0,
+      //   score: 0,
+      //   speedIncreaser: 1,
+      //   LabelVisible: true,
+      //   LabelText1: 'Press Enter to Start',
+      //   LabelText2: 'Space to Jump',
+      //   enterAllowed: true
+      // }
     }
 
   setUser = (user) => this.setState({ user })
@@ -279,7 +277,7 @@ class App extends Component {
       <Fragment>
         <Header user={user} />
         <React.Fragment>
-          <div id='mainGame' tabIndex='0' onKeyDown={this.btnPressed}>
+          <div id='mainGame' className='hide-item' tabIndex='0' onKeyDown={this.btnPressed}>
             <Dragonfly
               dragonflyPos={this.state.dragonflyPos}
               dragonflyRotate={this.state.dragonflyRotate}
@@ -299,7 +297,7 @@ class App extends Component {
               <button
                 className='btn btn-info m-2 myBtn'
                 style={{ width: 570, marginLeft: 4 }}
-                onClick={this.restart}
+                onClick={this.restartGame}
               >
               Restart
               </button>

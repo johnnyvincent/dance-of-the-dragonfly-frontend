@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap'
-import { SendCheck } from 'react-bootstrap-icons'
+// import { SendCheck } from 'react-bootstrap-icons'
 
 const ScoreForm = ({ handleSubmit, score, setScore }) => (
   <Form onSubmit={handleSubmit}>
@@ -13,7 +13,7 @@ const ScoreForm = ({ handleSubmit, score, setScore }) => (
         onChange={event => setScore(event.target.value)}
       />
     </Form.Group>
-    <Button className='mt-2 Bttn' variant='primary' type='submit'>Submit <SendCheck /></Button>
+    <Button className='mt-2 Bttn' variant='primary' type='submit'>Submit </Button>
     <div className='mt-5 footer' >Change your score the easy way.</div>
   </Form>
 )

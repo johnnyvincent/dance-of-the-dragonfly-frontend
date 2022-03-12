@@ -6,3 +6,9 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+  .hide:hover .hide-item,
+  .hide:focus .hide-item {
+      height: 0;
+      padding: 0;
+      overflow: hidden;
+  }

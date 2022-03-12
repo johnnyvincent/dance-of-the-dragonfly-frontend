@@ -36,20 +36,20 @@
   
   .Label1 {
     position: absolute;
-    left: 145px;
-    top: 258px;
+    left: 210px;
+    top: 675px;
     font-family: 'Notable', sans-serif;
-    color: #ffffff;
-    font-size: 20px;
+    color: #1619fc;
+    font-size: 30px;
   }
   
   .Label2 {
     position: absolute;
-    left: 187px;
-    top: 305px;
+    left: 230px;
+    top: 750px;
     font-family: 'Notable', sans-serif;
-    color: #ffffff;
-    font-size: 20px;
+    color: #16af44;
+    font-size: 30px;
   }
   
   .score {
@@ -57,7 +57,7 @@
     font-family: 'Notable', sans-serif;
     color: #ffffff;
     left: 2px;
-    top: -18px;
+    top: 680px;
     font-size: 49px;
   }
 
