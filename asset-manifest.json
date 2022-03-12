@@ -1,20 +1,25 @@
 {
   "files": {
-    "main.css": "/dance-of-the-dragonfly-frontend/static/css/main.d5cf0687.chunk.css",
-    "main.js": "/dance-of-the-dragonfly-frontend/static/js/main.ca473bc1.chunk.js",
-    "main.js.map": "/dance-of-the-dragonfly-frontend/static/js/main.ca473bc1.chunk.js.map",
+    "main.css": "/dance-of-the-dragonfly-frontend/static/css/main.2f5e451c.chunk.css",
+    "main.js": "/dance-of-the-dragonfly-frontend/static/js/main.5312be3b.chunk.js",
+    "main.js.map": "/dance-of-the-dragonfly-frontend/static/js/main.5312be3b.chunk.js.map",
     "runtime-main.js": "/dance-of-the-dragonfly-frontend/static/js/runtime-main.558faab2.js",
     "runtime-main.js.map": "/dance-of-the-dragonfly-frontend/static/js/runtime-main.558faab2.js.map",
-    "static/js/2.951686b4.chunk.js": "/dance-of-the-dragonfly-frontend/static/js/2.951686b4.chunk.js",
-    "static/js/2.951686b4.chunk.js.map": "/dance-of-the-dragonfly-frontend/static/js/2.951686b4.chunk.js.map",
+    "static/js/2.c260ffd6.chunk.js": "/dance-of-the-dragonfly-frontend/static/js/2.c260ffd6.chunk.js",
+    "static/js/2.c260ffd6.chunk.js.map": "/dance-of-the-dragonfly-frontend/static/js/2.c260ffd6.chunk.js.map",
     "index.html": "/dance-of-the-dragonfly-frontend/index.html",
-    "static/css/main.d5cf0687.chunk.css.map": "/dance-of-the-dragonfly-frontend/static/css/main.d5cf0687.chunk.css.map",
-    "static/js/2.951686b4.chunk.js.LICENSE.txt": "/dance-of-the-dragonfly-frontend/static/js/2.951686b4.chunk.js.LICENSE.txt"
+    "static/css/main.2f5e451c.chunk.css.map": "/dance-of-the-dragonfly-frontend/static/css/main.2f5e451c.chunk.css.map",
+    "static/js/2.c260ffd6.chunk.js.LICENSE.txt": "/dance-of-the-dragonfly-frontend/static/js/2.c260ffd6.chunk.js.LICENSE.txt",
+    "static/media/dragonfly.9718c01e.png": "/dance-of-the-dragonfly-frontend/static/media/dragonfly.9718c01e.png",
+    "static/media/game.css": "/dance-of-the-dragonfly-frontend/static/media/pond-background.3feee7d6.png",
+    "static/media/underground.a201c852.png": "/dance-of-the-dragonfly-frontend/static/media/underground.a201c852.png",
+    "static/media/vertical-net1.61f5d873.png": "/dance-of-the-dragonfly-frontend/static/media/vertical-net1.61f5d873.png",
+    "static/media/vertical-net2.b4369714.png": "/dance-of-the-dragonfly-frontend/static/media/vertical-net2.b4369714.png"
   },
   "entrypoints": [
     "static/js/runtime-main.558faab2.js",
-    "static/js/2.951686b4.chunk.js",
-    "static/css/main.d5cf0687.chunk.css",
-    "static/js/main.ca473bc1.chunk.js"
+    "static/js/2.c260ffd6.chunk.js",
+    "static/css/main.2f5e451c.chunk.css",
+    "static/js/main.5312be3b.chunk.js"
   ]
 }
