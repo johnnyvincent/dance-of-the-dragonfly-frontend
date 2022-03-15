@@ -67,8 +67,8 @@ const Score = ({ user, msgAlert }) => {
           <h3>{score.score}
             <span className='postDate'>{format(score.createdAt)}</span>
           </h3>
-          <p>Easy dub? : {score}</p>
-          <p>{score}</p>
+          <p>Easy dub? : {score.score}</p>
+          <p>{score.score}</p>
           <Link to={`/scores/${id}/edit`}>
             <Button className='Bttn' variant='primary' type='submit'>Update Score </Button>
           </Link>
